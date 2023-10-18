@@ -10,4 +10,12 @@ def dfs(v: int, order: list[int], used: list[bool], graph: Graph):
 
     order.append(v)
 
+def dfs_t(v: int, component: list[int], used: list[bool], graph_t: Graph):
+    used[v] = True
+    component.append(v)
+
+    for node in range(graph_t.count_v()):
+        if not used[node] and graph_t[v][node] > 0:
+            dfs_t(v=node, component=component, used=used, graph_t=graph_t)
+
 
