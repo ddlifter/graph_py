@@ -33,7 +33,7 @@ class Graph:
         for row in self.__matrix:
             row.append(0)
 
-        self.__matrix.append([0] * self.count_v() + 1)
+        self.__matrix.append([0] * (self.count_v() + 1))
 
 
     def add_e(self, v: int, w: int, c: int = 1):
@@ -44,4 +44,5 @@ class Graph:
             raise Exception(f'Incorrect w: index is overflow! Size: {self.count_v()}, index w {w}')
         
         self.__matrix[v][w] = c
+        
         

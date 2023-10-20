@@ -1,5 +1,5 @@
 from graph import Graph
-from utils import dfs, dfs_t
+from dfs import dfs, dfs_t
 
 COUNT = 8
 VERTEX = ["A", "B", "C", "D", "E", "F", "G", "H"]
@@ -23,34 +23,33 @@ def init_graph(graph : Graph):
     graph.add_e(5, 6)
     graph.add_e(6, 5)
 
-    if __name__ == '__main__':
+graph = Graph()
 
-        graph = Graph()
+init_graph(graph)
 
-        init_graph(graph)
+order : list[int] = []
+used : list[bool] = [False]*graph.count_v()
+component = []
 
-        order : list[int] = []
-        used : list[bool] = [False]*graph.count_v()
-        component = []
-
-        for i in range(graph.count_v()):
-            if not used[i]:
-                dfs(i, order, used, graph)
-
-        
-        graph_t = Graph.get_transpose_graph(graph)
+for i in range(graph.count_v()):
+    if not used[i]:
+        dfs(i, order, used, graph)
 
 
-        used : list[bool] = [False]*graph.count_v()
+graph_t = Graph.get_transpose_graph(graph)
 
-        for i in range(graph.count_v()):
-            v = order[graph.count_v() - i - 1]
 
-            if not used[v]:
-                dfs_t(v, component, used, graph_t)
+used : list[bool] = [False]*graph.count_v()
 
-                print("".join([VERTEX[index] + " " for index in component]))
+for i in range(graph.count_v()):
+    v = order[graph.count_v() - i - 1]
 
-                component.clear()
+    if not used[v]:
+        dfs_t(v, component, used, graph_t)
+
+        print("".join([VERTEX[index] + " " for index in component]))
+
+        component.clear()
+
 
 
