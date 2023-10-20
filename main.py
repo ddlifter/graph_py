@@ -1,5 +1,5 @@
 from graph import Graph
-from dfs import dfs, dfs_t
+from dfs import dfs_first, dfs_second
 from trans import trans_
 from init_graph import init_Graph, VERTEX
 
@@ -13,7 +13,7 @@ component = []
 
 for i in range(graph.count_v()):
     if not used[i]:
-        dfs(i, order, used, graph)
+        dfs_first(i, order, used, graph)
 
 
 graph_t = Graph.get_transpose_graph(graph)
@@ -21,11 +21,13 @@ graph_t = Graph.get_transpose_graph(graph)
 
 used : list[bool] = [False]*graph.count_v()
 
+
+print("Решение 1 способом: ")
 for i in range(graph.count_v()):
     v = order[graph.count_v() - i - 1]
 
     if not used[v]:
-        dfs_t(v, component, used, graph_t)
+        dfs_second(v, component, used, graph_t)
 
         print("".join([VERTEX[index] + " " for index in component]))
 
@@ -34,6 +36,7 @@ for i in range(graph.count_v()):
 
 print("--------")
 
+print("Решение 2 способом: ")
 trans_(graph)
 
 
