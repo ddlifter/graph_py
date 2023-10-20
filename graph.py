@@ -44,5 +44,26 @@ class Graph:
             raise Exception(f'Incorrect w: index is overflow! Size: {self.count_v()}, index w {w}')
         
         self.__matrix[v][w] = c
+
+    
+    def output(self):
+        for i in self.__matrix:
+            print(*i)
+
+    
+    def del_v(self, name: str):
+        index = int(name)
+
+        for row in self.__matrix:
+            row.pop(index)
+
+        self.__matrix.pop(index)
+
+    
+    def vertex(self, v: int, i:int):
+        for index in self.__matrix[v]:
+            if index == i:
+                return 
+
         
         

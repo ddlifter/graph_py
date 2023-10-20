@@ -7,22 +7,26 @@ graph = Graph()
 
 init_Graph(graph)
 
+print("--------------")
+print("Решение 1 способом: ")
 order : list[int] = []
 used : list[bool] = [False]*graph.count_v()
 component = []
 
+
+#Первый обход графа в глубину
 for i in range(graph.count_v()):
     if not used[i]:
         dfs_first(i, order, used, graph)
 
 
+#Транспонируем матрицу
 graph_t = Graph.get_transpose_graph(graph)
 
-
+#Обновляем список пройденных вершин
 used : list[bool] = [False]*graph.count_v()
 
-
-print("Решение 1 способом: ")
+#Проходим граф в глубину во второй раз и выводим сск
 for i in range(graph.count_v()):
     v = order[graph.count_v() - i - 1]
 
@@ -34,11 +38,16 @@ for i in range(graph.count_v()):
         component.clear()
 
 
-print("--------")
+print("--------------")
 
 print("Решение 2 способом: ")
+
 trans_(graph)
 
+print("--------------")
 
+graph.output()
 
-
+print("--------------")
+graph.del_v("0")
+graph.output()
