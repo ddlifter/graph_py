@@ -1,5 +1,6 @@
 from graph import Graph
 
+#Первый обход графа в глубину
 def dfs_first(v: int, order: list[int], used: list[bool], graph: Graph):
     used[v] = True
 
@@ -10,6 +11,7 @@ def dfs_first(v: int, order: list[int], used: list[bool], graph: Graph):
 
     order.append(v)
 
+#Второй обход графа в глубину после транспонирования
 def dfs_second(v: int, component: list[int], used: list[bool], graph_t: Graph):
     used[v] = True
     component.append(v)

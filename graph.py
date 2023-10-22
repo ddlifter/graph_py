@@ -25,6 +25,12 @@ class Graph:
 
         return Graph(matrix=matrix)
     
+
+    def output(self):
+        for i in self.__matrix:
+            print(*i)
+
+    
     def count_v(self):
         return len(self.__matrix)
     
@@ -45,13 +51,11 @@ class Graph:
         
         self.__matrix[v][w] = c
 
-    
-    def output(self):
-        for i in self.__matrix:
-            print(*i)
 
-    
     def del_v(self, name: str):
+        if int(name) > self.count_v():
+            raise Exception(f'Incorrect name: there is no vertex with this name')
+        
         index = int(name)
 
         for row in self.__matrix:
@@ -59,11 +63,42 @@ class Graph:
 
         self.__matrix.pop(index)
 
+
+    def del_e(self, v: int, w: int):
+        if v > self.count_v():
+            raise Exception(f'Incorrect v: index is overflow. Size: {self.count_v()}, index v {v}')
+        
+        if w > len(self.__matrix[v]):
+            raise Exception(f'Incorrect w: index is overflow! Size: {self.count_v()}, index w {w}')
+        
+        self.__matrix[v][w] = 0
+    
     
     def vertex(self, v: int, i:int):
         for index in self.__matrix[v]:
-            if index == i:
-                return 
+            if index == i == 1:
+                return self.__matrix[i]
+        raise Exception(f'there is no adjacent vertex with index {i}')
+    
+
+    def edit_e(self, v: int, w: int, c: int = 1):
+        if v > self.count_v():
+            raise Exception(f'Incorrect v: index is overflow. Size: {self.count_v()}, index v {v}')
+        
+        if w > len(self.__matrix[v]):
+            raise Exception(f'Incorrect w: index is overflow! Size: {self.count_v()}, index w {w}')
+        
+        self.__matrix[v][w] = c
+
+
+    def first(self, v: int):
+        if sum(self.__matrix[v]) == 0:
+            return [0] * self.count_v()
+        
+        for i in self.__matrix[v]:
+            if i == 1:
+                return self.__matrix[i]
+        
 
         
         

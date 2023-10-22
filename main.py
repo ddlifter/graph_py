@@ -49,5 +49,4 @@ print("--------------")
 graph.output()
 
 print("--------------")
-graph.del_v("0")
-graph.output()
+print(graph.first(5))
