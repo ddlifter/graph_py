@@ -92,13 +92,34 @@ class Graph:
 
 
     def first(self, v: int):
+        if v > self.count_v():
+            raise Exception(f'Incorrect v: index is overflow. Size: {self.count_v()}, index v {v}')
+        
         if sum(self.__matrix[v]) == 0:
             return [0] * self.count_v()
         
+        res = 0
         for i in self.__matrix[v]:
             if i == 1:
-                return self.__matrix[i]
+                return res
+            res += 1
         
 
+    def next(self, v: int, i: int):
+        if v > self.count_v():
+            raise Exception(f'Incorrect v: index is overflow. Size: {self.count_v()}, index v {v}')
         
+        if i > self.count_v():
+            raise Exception(f'Incorrect i: index is overflow. Size: {self.count_v()}, index i {i}')
         
+        if i == self.count_v():
+            return [0] * self.count_v()
+        
+        res = i + 1
+        for index in self.__matrix[v][i+1::]:
+            if index == 1:
+                return res
+            res += 1
+            
+        return "there is no adjacent vertex with this i"
+                    
